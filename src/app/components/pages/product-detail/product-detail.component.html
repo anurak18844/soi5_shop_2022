@@ -1,0 +1,73 @@
+<div class="row mt-3">
+    <div class="h3">Product Detail </div>
+</div>
+<hr>
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                Details: {{currentProduct.name}}
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div style="background-color: darkgrey;height: 100%;width:100%;">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="card-title"></h4>
+                        <p class="card-text">Price: {{currentProduct.price}}</p>
+                        <p class="card-text">Stock: {{currentProduct.unit_in_stock}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted" >
+                Reviews: 
+            </div>
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <form>
+                            <div class="col">
+                                <div class="mb-2">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <select name="star" class="form-select">
+                                                <option value="5">5</option>
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" name="comment" class="form-control"
+                                                required>
+                                        </div>
+                                        <div class="col-md-2 d-grid gap-2">
+                                            <button type="submit" name="btnPost" class="btn btn-primary">
+                                                Review
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row h-4">
+                            <div class="col-md-12">
+                                <div class="row mt-1">
+                                    <div class="col">
+                                        <p class="h6">Stars: </p>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
