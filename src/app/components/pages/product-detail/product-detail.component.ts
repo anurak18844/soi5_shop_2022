@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -10,9 +11,15 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductDetailComponent implements OnInit {
   id: any;
   currentProduct: any
-  constructor(private service: ProductService, private activatedRouter: ActivatedRoute) { }
+  reviewForm!: FormGroup;
+  constructor(private service: ProductService, private activatedRouter: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    this.reviewForm = new FormGroup({
+      star: new FormControl(),
+      comment: new FormControl(),
+    });
+
     this.activatedRouter.params.subscribe(params=>{
       this.id = params['id'];
     });
@@ -21,5 +28,38 @@ export class ProductDetailComponent implements OnInit {
       this.currentProduct = res.data;
     });
   }
+
+  createRange(item){
+    if(item == null){
+      item = 0;
+    }
+    let a = new Array(item);
+    return a
+  }
+
+  createRangeBlack(item){
+    if(item == null){
+      item = 0;
+    }
+    item = 5-item;
+    let a = new Array(item);
+    return a
+  }
+
+  submitReview(id: any){
+    let review = {
+      star: this.reviewForm.value.star,
+      comment: this.reviewForm.value.comment,
+    }
+    // alert(id + review.star + review.comment)
+    // console.log(id);
+    // console.log(review.star);
+    // console.log(review.comment);
+    this.service.updateReview(review, this.id).subscribe((res)=>{
+      this.router.navigateByUrl('/', {skipLocationChange: true})
+      .then(()=> this.router.navigate(['/product/detail/'+this.id]));
+    });
+  }
+
 
 }

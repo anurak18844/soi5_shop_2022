@@ -22,17 +22,17 @@
                 </div>
             </div>
             <div class="card-footer text-muted" >
-                Reviews: 
+                Reviews
             </div>
             <div class="card">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <form>
+                        <form [formGroup]="reviewForm">
                             <div class="col">
                                 <div class="mb-2">
                                     <div class="row">
                                         <div class="col-md-2">
-                                            <select name="star" class="form-select">
+                                            <select name="star" class="form-select" formControlName="star">
                                                 <option value="5">5</option>
                                                 <option value="4">4</option>
                                                 <option value="3">3</option>
@@ -42,10 +42,10 @@
                                         </div>
                                         <div class="col-md-8">
                                             <input type="text" name="comment" class="form-control"
-                                                required>
+                                                required formControlName="comment">
                                         </div>
                                         <div class="col-md-2 d-grid gap-2">
-                                            <button type="submit" name="btnPost" class="btn btn-primary">
+                                            <button type="submit" name="btnPost" class="btn btn-primary" (click)="submitReview(currentProduct._id)">
                                                 Review
                                             </button>
                                         </div>
@@ -54,13 +54,16 @@
                             </div>
                         </form>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item" *ngFor="let review of currentProduct.reviews">
                         <div class="row h-4">
                             <div class="col-md-12">
                                 <div class="row mt-1">
                                     <div class="col">
-                                        <p class="h6">Stars: </p>
-                                        <p></p>
+                                        <p class="h6">
+                                            <span class="fa fa-star checked" style="color:orange" *ngFor="let items of createRange(review.star)"></span>
+                                            <span class="fa fa-star checked" style="color:rgb(155, 148, 137)" *ngFor="let items of createRangeBlack(review.star)"></span>
+                                        </p>
+                                        <p>{{review.comment}}</p>
                                     </div>
                                 </div>
                             </div>

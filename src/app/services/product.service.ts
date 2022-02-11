@@ -45,4 +45,12 @@ export class ProductService {
     return this.http.delete<any>(getUrl);
   }
 
+  updateReview(product: any,id: any){
+    let getUrl = `${this.url}/${id}`;
+    return this.http.patch<any>(getUrl, product)
+      .pipe(map((res)=>{
+        return res;
+      }));
+  }
+
 }
